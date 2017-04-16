@@ -31,10 +31,8 @@ for i=1:size(X, 2),
   sigma(i) = std(X(:, i));
 end;
 
-for i=1:size(X, 1),
-  for j=1:size(X, 2),
-    X_norm(i, j) = (X(i, j) - mu(j)) / sigma(j);
-  end;
+for i=1:size(X, 2),
+  X_norm(:, i) = (X(:, i) - mu(i)) ./ sigma(i);
 end;
 
 % ============================================================
