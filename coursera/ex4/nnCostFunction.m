@@ -41,7 +41,24 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 X = [ones(m, 1) X];
-a1 = X;
+a1 = X';
+z2 = Theta1 * a1;
+a2 = sigmoid(z2);
+a2 = [ones(1, size(a2, 2)); a2];
+z3 = Theta2 * a2;
+a3 = sigmoid(z3);
+h = a3;
+
+yv = [];
+for i=1:m,
+  I = eye(num_labels);
+  v = I(:, y(i));
+  yv = [yv v];
+end;
+
+keyboard;
+J = (1 / m) * sum(sum((-yv * log(h)' - (1-yv)*log(1-h)'))) ;
+
 keyboard;
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
